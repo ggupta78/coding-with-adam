@@ -11,7 +11,7 @@ export default class BulletController {
     this.soundEnabled = soundEnabled;
 
     this.shootSound = new Audio("./sounds/shoot.wav");
-    this.shootSound.volume = 0.5;
+    this.shootSound.volume = 0.2;
   }
 
   shoot(x, y, velocity, timeTillNextBulletAllowed = 0) {
@@ -22,7 +22,7 @@ export default class BulletController {
       this.bullets.push(bullet);
       if (this.soundEnabled) {
         this.shootSound.currentTime = 0;
-        this.shootSound.play();
+        // this.shootSound.play();
       }
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
@@ -38,5 +38,18 @@ export default class BulletController {
     if (this.timeTillNextBulletAllowed > 0) {
       this.timeTillNextBulletAllowed--;
     }
+  }
+
+  collideWith(sprite) {
+    const bulletThatHitSpriteIndex = this.bullets.findIndex(
+      bullet => bullet.collideWith(sprite)
+    );
+
+    if (bulletThatHitSpriteIndex >= 0) {
+      this.bullets.splice(bulletThatHitSpriteIndex, 1);
+      return true;
+    }
+
+    return false;
   }
 }
