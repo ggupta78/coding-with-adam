@@ -1,4 +1,13 @@
-<div data-controller="game" data-game-url-value="<%= image_url 'space.png' %>">
+<div data-controller="game"
+  data-game-assets-value='
+    {
+      "space": "<%= image_url "space.png" %>",
+      "player": "<%= image_url "player.png" %>"
+    }
+  '
+  data-action="keyup@window->game#keyUp"
+  data-action="keydown@window->game#keyDown"
+>
   <h1>Space Invaders</h1>
   <canvas id="game" data-game-target="canvas">
   </canvas>

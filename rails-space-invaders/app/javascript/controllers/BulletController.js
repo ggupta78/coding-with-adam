@@ -10,8 +10,10 @@ export default class BulletController {
     this.bulletColor = bulletColor;
     this.soundEnabled = soundEnabled;
 
-    this.shootSound = new Audio("./sounds/shoot.wav");
-    this.shootSound.volume = 0.2;
+    if (this.soundEnabled) {
+      this.shootSound = new Audio("./sounds/shoot.wav");
+      this.shootSound.volume = 0.2;
+    }
   }
 
   shoot(x, y, velocity, timeTillNextBulletAllowed = 0) {
@@ -22,7 +24,7 @@ export default class BulletController {
       this.bullets.push(bullet);
       if (this.soundEnabled) {
         this.shootSound.currentTime = 0;
-        // this.shootSound.play();
+        this.shootSound.play();
       }
       this.timeTillNextBulletAllowed = timeTillNextBulletAllowed;
     }
